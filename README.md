@@ -2,6 +2,8 @@
 
 > Will the internet cancel you? Find out before they do.
 
+🔴 **Live at [ratiocheck-n5gqw3dld-dixitasurti01-8704s-projects.vercel.app](https://ratiocheck-n5gqw3dld-dixitasurti01-8704s-projects.vercel.app)**
+
 RatioCheck analyzes any text, image, or tweet URL and tells you exactly how it'll play on the internet — who'll love it, who'll hate it, who'll try to cancel it, and gives you three safer rewrites that keep your intent intact.
 
 ## Features
@@ -28,6 +30,13 @@ RatioCheck analyzes any text, image, or tweet URL and tells you exactly how it'l
 - 🎬 Video analysis — paste a YouTube/TikTok URL or upload a clip
 - 🎵 Audio analysis — upload a podcast clip or voice memo
 - 📊 Historical ratio tracker — see how your score changes over time
+
+## Deployment
+
+| Service | URL |
+|---|---|
+| Frontend | https://ratiocheck-n5gqw3dld-dixitasurti01-8704s-projects.vercel.app |
+| Backend API | https://ratiocheck.onrender.com |
 
 ## Setup
 

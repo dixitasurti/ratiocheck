@@ -137,7 +137,7 @@ npm run dev
 # Hot-reloads instantly on every file save
 ```
 
-The frontend automatically points to `localhost:8000` when running locally — no config needed. In production it uses the `VITE_API_URL` environment variable set in Vercel.
+The frontend (at `localhost:5173`) automatically sends API requests to the backend at `localhost:8000` when running locally — no config needed. In production, it uses the `VITE_API_URL` environment variable set in Vercel to reach the Render backend.
 
 ### Deploying changes
 

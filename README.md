@@ -114,6 +114,52 @@ Currently supports Twitter/X URLs only via the public oEmbed API.
 
 Returns `{ "status": "ok" }`
 
+## Development workflow
+
+### Running locally
+
+Open two terminals:
+
+**Terminal 1 — Backend:**
+```bash
+cd backend
+source venv/bin/activate  # Windows: venv\Scripts\activate
+uvicorn main:app --reload
+# Runs at http://localhost:8000
+# --reload auto-restarts on every file save
+```
+
+**Terminal 2 — Frontend:**
+```bash
+cd frontend
+npm run dev
+# Runs at http://localhost:5173
+# Hot-reloads instantly on every file save
+```
+
+The frontend automatically points to `localhost:8000` when running locally — no config needed. In production it uses the `VITE_API_URL` environment variable set in Vercel.
+
+### Deploying changes
+
+After testing locally, push to GitHub and both services redeploy automatically:
+
+```bash
+git add .
+git commit -m "describe your change"
+git push
+```
+
+| Service | Redeploy time |
+|---|---|
+| Vercel (frontend) | ~1 minute |
+| Render (backend) | ~2 minutes |
+
+### Debugging
+
+- **Backend logs:** Render dashboard → ratiocheck → Logs tab (live)
+- **Frontend errors:** Browser DevTools → Console
+- **API testing:** `curl http://localhost:8000/health` or open in browser
+
 ## Tech stack
 
 | Layer | Stack |

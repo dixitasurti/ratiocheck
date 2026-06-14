@@ -1,5 +1,8 @@
 from fastapi import FastAPI, File, UploadFile, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
+from slowapi import Limiter, _rate_limit_exceeded_handler
+from slowapi.util import get_remote_address
+from slowapi.errors import RateLimitExceeded
 import anthropic
 import base64
 import httpx
@@ -11,7 +14,10 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+limiter = Limiter(key_func=get_remote_address)
 app = FastAPI(title="RatioCheck API")
+app.state.limiter = limiter
+app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
 _origins_env = os.getenv("ALLOWED_ORIGINS", "*")
 ALLOWED_ORIGINS = ["*"] if _origins_env == "*" else [o.strip() for o in _origins_env.split(",")]
@@ -100,6 +106,7 @@ def analyze_text_content(content: str) -> dict:
 
 
 @app.post("/analyze")
+@limiter.limit("15/hour")
 async def analyze(request: Request, file: Optional[UploadFile] = File(None)):
     content_type = request.headers.get("content-type", "")
 
@@ -177,6 +184,7 @@ async def analyze(request: Request, file: Optional[UploadFile] = File(None)):
 
 
 @app.post("/fetch-url")
+@limiter.limit("30/hour")
 async def fetch_url(request: Request):
     try:
         body = await request.json()

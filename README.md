@@ -160,6 +160,17 @@ git push
 - **Frontend errors:** Browser DevTools → Console
 - **API testing:** `curl http://localhost:8000/health` or open in browser
 
+## Rate limiting
+
+To protect API credits, the following limits are enforced per IP address:
+
+| Endpoint | Limit |
+|---|---|
+| `POST /analyze` | 15 requests per hour |
+| `POST /fetch-url` | 30 requests per hour |
+
+Exceeding the limit returns `429 Too Many Requests`.
+
 ## Tech stack
 
 | Layer | Stack |
